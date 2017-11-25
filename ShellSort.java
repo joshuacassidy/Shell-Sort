@@ -1,12 +1,12 @@
-public class ShellSort {
+public class ShellSort<T extends Comparable<T>> {
 
-    public int[] sort(int[] arr) {
+    public T[] sort(T[] arr) {
         for(int gap = arr.length; gap > 0; gap/=2) {
             System.out.println(gap);
             for (int i = gap; i < arr.length; i++) {
                 int j = i;
-                while (j >= gap && (arr[j-gap] > arr[j])) {
-                    int temp = arr[j];
+                while (j >= gap && (arr[j-gap].compareTo(arr[j]) > 0)) {
+                    T temp = arr[j];
                     arr[j] = arr[j - gap];
                     arr[j-gap] = temp;
                     j-=gap;
@@ -16,7 +16,7 @@ public class ShellSort {
         return arr;
     }
 
-    public int[] recursiveSort(int[] arr,int gap) {
+    public T[] recursiveSort(T[] arr,int gap) {
         if (gap > 0) {
             arr = recursiveSort2(arr,gap,gap);
             return recursiveSort(arr, gap/2);
@@ -24,7 +24,7 @@ public class ShellSort {
         return arr;
     }
 
-    public int[] recursiveSort2(int[] arr,int gap, int i) {
+    public T[] recursiveSort2(T[] arr,int gap, int i) {
         if (i < arr.length) {
             arr = recursiveSort3(arr,gap,i);
             return recursiveSort2(arr, gap, i+1);
@@ -32,9 +32,9 @@ public class ShellSort {
         return arr;
     }
 
-    public int[] recursiveSort3(int[] arr,int gap, int j) {
-        if (j >= gap && (arr[j-gap] > arr[j])) {
-            int temp = arr[j];
+    public T[] recursiveSort3(T[] arr,int gap, int j) {
+        if (j >= gap && (arr[j-gap].compareTo(arr[j]) > 0)) {
+            T temp = arr[j];
             arr[j] = arr[j - gap];
             arr[j-gap] = temp;
             return recursiveSort3(arr, gap , j-gap);
@@ -42,9 +42,9 @@ public class ShellSort {
         return arr;
     }
 
-    public void traverse(int [] arr) {
-        for (int i: arr) {
-            System.out.print(i + " ");
+    public void traverse(T [] arr) {
+        for (T i: arr) {
+            System.out.printf("%s ",i);
         }
     }
 
